@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net5.0;net462</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
+		<IsPackable>true</IsPackable>
+		<Nullable>enable</Nullable>
+
+		<Title>Amusoft.Toolkit.Mvvm.Core</Title>
+		<Description>Amusoft.Toolkit.Mvvm.Core is a common dependency package. Use one of the platforms to actually use the component</Description>
+		<PackageId>Amusoft.Toolkit.Mvvm.Core</PackageId>
+		<Product>Amusoft.Toolkit.Mvvm.Core</Product>
+		<PackageReleaseNotes>
+			navigation system
+		</PackageReleaseNotes>
+		<PackageTags>mvvm prism alternative</PackageTags>
+	</PropertyGroup>
+	
+	<ItemGroup Condition="'$(TargetFramework)' != 'net462'">
+		<Compile Remove="$(ProjectDir)Compat\*.cs"/>
+		<None Include="$(ProjectDir)Compat\*.cs"/>
+	</ItemGroup>
+	
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net462'">
+		<NoWarn>$(NoWarn);nullable</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.Wpf"/>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.UnitTests"/>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.IntegrationTests"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="all"/>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="[3.1.32,)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="[3.1.32,)" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.32" />
+	</ItemGroup>
+
+</Project>
