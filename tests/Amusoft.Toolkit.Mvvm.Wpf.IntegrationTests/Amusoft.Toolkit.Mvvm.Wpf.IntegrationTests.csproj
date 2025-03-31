@@ -1,6 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Amusoft.Toolkit.Mvvm.Core\Amusoft.Toolkit.Mvvm.Core.csproj" />
+    <ProjectReference Include="..\Amusoft.Toolkit.Mvvm.Tests.Shared\Amusoft.Toolkit.Mvvm.Tests.Shared.csproj"/>
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="xunit.runner.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 

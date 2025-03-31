@@ -1,6 +1,5 @@
 using System.Data.Common;
 using Amusoft.Toolkit.Mvvm.Core;
-using Amusoft.Toolkit.Mvvm.Tests.Shared;
 using Shouldly;
 using Xunit;
 

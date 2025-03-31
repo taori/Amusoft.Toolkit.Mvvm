@@ -12,9 +12,9 @@
   </PropertyGroup>
 
 
-<!--  <ItemGroup>-->
-<!--    <None Include="**\*.shared.cs" />-->
-<!--  </ItemGroup>-->
+  <ItemGroup>
+    <None Include="**\*.shared.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Amusoft.Toolkit.Mvvm.Core\Amusoft.Toolkit.Mvvm.Core.csproj" />
