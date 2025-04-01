@@ -26,12 +26,12 @@
 [![NuGet version (Amusoft.Toolkit.Mvvm)](https://img.shields.io/nuget/vpre/Amusoft.Toolkit.Mvvm.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm/latest/prerelease)
 
 <!--CoverageStart-->
-![Code Coverage](https://img.shields.io/badge/Code%20Coverage-28%25-success?style=flat)
+![Code Coverage](https://img.shields.io/badge/Code%20Coverage-27%25-success?style=flat)
 
 Package | Line Rate | Branch Rate | Health
 -------- | --------- | ----------- | ------
-Amusoft.Toolkit.Mvvm.Core | 28% | 15% | ✔
-**Summary** | **28%** (69 / 248) | **15%** (12 / 82) | ✔
+Amusoft.Toolkit.Mvvm.Core | 27% | 14% | ✔
+**Summary** | **27%** (69 / 256) | **14%** (12 / 88) | ✔
 
 _Minimum allowed line rate is 1%_
 
