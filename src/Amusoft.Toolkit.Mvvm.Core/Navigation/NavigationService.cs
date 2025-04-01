@@ -26,7 +26,7 @@ internal class NavigationService : INavigationService
     private readonly ConcurrentDictionary<string, Stack<NavigationModel>> _modelHistoryByRegionName = new();
 
     private readonly WeakEvent<NavigationHistoryChanged> _onHistoryChanged = new();
-    public event NavigationHistoryChanged? OnHistoryChanged
+    public event NavigationHistoryChanged OnHistoryChanged
     {
         add{ _onHistoryChanged.Add(value);}
         remove{ _onHistoryChanged.Remove(value);}
@@ -164,13 +164,16 @@ internal class NavigationService : INavigationService
             IEnumerable<object> GetStrategies(IRestoreStrategyProvider provider)
             {
                 var method = provider.GetType().GetMethod(nameof(IRestoreStrategyProvider.GetStrategies));
+                if (method is null)
+	                return [];
+                
                 var specificMethod = method.MakeGenericMethod(oldModel.GetType());
                 var strategies = specificMethod.Invoke(provider, null);
-                return strategies as IEnumerable<object>;
+                return strategies as IEnumerable<object> ?? [];
             }
         
             var restoreStrategies = _restoreStrategyProviders
-                .SelectMany(d => GetStrategies(d))
+                .SelectMany(GetStrategies)
                 .ToArray();
 
             var castedStrategies = Array.CreateInstance(typeof(IRestoreStrategy<>).MakeGenericType(oldModel.GetType()), restoreStrategies.Length);
@@ -178,7 +181,9 @@ internal class NavigationService : INavigationService
 
             var modelType = typeof(NavigationModel<>).MakeGenericType(oldModel.GetType());
             var instance = Activator.CreateInstance(modelType, args: [oldModel, castedStrategies]);
-            stack.Push(instance as NavigationModel);
+            if (instance is not NavigationModel navigationModel)
+	            throw new MvvmCoreException($"Navigation model could not be built for {modelType.Name}");
+            stack.Push(navigationModel);
         }
     }
 

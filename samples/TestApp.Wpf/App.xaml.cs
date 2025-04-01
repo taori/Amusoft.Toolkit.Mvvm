@@ -26,8 +26,8 @@ namespace TestApp.Wpf
 			{
 				options.MappingInput
 					.WithAssembly(typeof(App).Assembly)
-					.WithViewFilter(d => d.FullName.Contains(".Views."))
-					.WithViewModelFilter(d => d.FullName.Contains(".ViewModels."));
+					.WithViewFilter(d => d.FullName?.Contains(".Views.") ?? false)
+					.WithViewModelFilter(d => d.FullName?.Contains(".ViewModels.") ?? false);
 			});
 			sc.AddTransient<ViewAVM>();
 			sc.AddTransient<ViewBVM>();
@@ -47,6 +47,6 @@ namespace TestApp.Wpf
 			base.OnActivated(e);
 		}
 
-		public ServiceProvider ServiceProvider { get; set; }
+		public ServiceProvider ServiceProvider { get; set; } = null!;
 	}
 }

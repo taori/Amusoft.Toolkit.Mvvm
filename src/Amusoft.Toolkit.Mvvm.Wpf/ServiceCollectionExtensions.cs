@@ -12,7 +12,8 @@ public static class ServiceCollectionExtensions
 	/// Adds Services related to MVVM for WPF
 	/// </summary>
 	/// <param name="services"></param>
-	public static void AddMvvmWpf(this IServiceCollection services, Action<MvvmOptions>? setupAction = default)
+	/// <param name="setupAction"></param>
+	public static void AddMvvmWpf(this IServiceCollection services, Action<MvvmOptions>? setupAction = null)
 	{
 		services.AddMvvmCoreServices();
 		services.AddSingleton<IDataTemplateResourceAppender, DataTemplateResourceAppender>();

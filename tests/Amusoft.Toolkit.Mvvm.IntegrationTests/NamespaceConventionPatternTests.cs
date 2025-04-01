@@ -13,8 +13,8 @@ namespace Amusoft.Toolkit.Mvvm.IntegrationTests
             var pattern = new NamespaceConventionPattern();
             var input = new MvvmMappingInput()
                 .WithAssembly(typeof(NamespaceConventionPatternTests).Assembly)
-                .WithViewFilter(d => d.FullName.StartsWith("NamespaceConventionPatternTests"))
-                .WithViewModelFilter(d => d.FullName.StartsWith("NamespaceConventionPatternTests"));
+                .WithViewFilter(d => d.FullName?.StartsWith("NamespaceConventionPatternTests") ?? false)
+                .WithViewModelFilter(d => d.FullName?.StartsWith("NamespaceConventionPatternTests") ?? false);
 
             var results = pattern.GetResult(input);
             results.Matches.Length.ShouldBeGreaterThan(0);

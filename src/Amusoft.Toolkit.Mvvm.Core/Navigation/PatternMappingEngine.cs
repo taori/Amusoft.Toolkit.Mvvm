@@ -190,11 +190,11 @@ public class NamespaceConventionPattern : IMvvmMappingPattern
 		}
 
 		var viewMap = viewTypes
-			.Select(d => (type: d, name: GetMatchingName(d.FullName, ViewPattern, ViewTruncateEndPattern)))
+			.Select(d => (type: d, name: GetMatchingName(d.FullName!, ViewPattern, ViewTruncateEndPattern)))
 			.Where(d => d.name != null)
 			.ToDictionary(d => d.name!, d => d.type);
 		var viewModelMap = modelTypes
-			.Select(d => (type: d, name: GetMatchingName(d.FullName, ViewModelPattern, ViewModelTruncateEndPattern)))
+			.Select(d => (type: d, name: GetMatchingName(d.FullName!, ViewModelPattern, ViewModelTruncateEndPattern)))
 			.Where(d => d.name != null)
 			.ToDictionary(d => d.name!, d => d.type);
 

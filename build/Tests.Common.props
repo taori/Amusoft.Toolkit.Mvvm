@@ -1,5 +1,8 @@
 ﻿<Project>
+
+	<!-- TestProject PropertyGroup-->
 	<PropertyGroup Condition="'$(MSBuildProjectName)' != 'Amusoft.Toolkit.Mvvm.Tests.Shared'">
+		<XunitRunnerConfigPath>$(SolutionDir)..\tests\Amusoft.Toolkit.Mvvm.Tests.Shared\xunit.runner.json</XunitRunnerConfigPath>
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
 		<TargetFramework>net8.0</TargetFramework>
@@ -7,6 +10,10 @@
 		<OutputType>Exe</OutputType>
 		<IsTestProject>true</IsTestProject>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<Using Include="Xunit" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
@@ -26,9 +33,16 @@
 		<PackageReference Include="Verify.XunitV3" Version="28.15.0" />
 	</ItemGroup>
 
+	<!-- TestProject ItemGroup-->
 	<ItemGroup Condition="'$(MSBuildProjectName)' != 'Amusoft.Toolkit.Mvvm.Tests.Shared'">
 		<Compile Include="..\Amusoft.Toolkit.Mvvm.Tests.Shared\**\*.shared.cs">
 			<Link>Shared\%(Compile.Filename).cs</Link>
 		</Compile>
+		
+		<!-- Copy xunit.runner.json to output directories for all test projects -->
+		<Content Update="$(XunitRunnerConfigPath)">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
+
 </Project>

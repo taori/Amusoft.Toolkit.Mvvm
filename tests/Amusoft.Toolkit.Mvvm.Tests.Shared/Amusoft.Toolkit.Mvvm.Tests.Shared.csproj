@@ -1,6 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <Import Project="..\..\build\Tests.Common.props"/>
   
   <PropertyGroup>
     <Nullable>enable</Nullable>
@@ -10,14 +8,20 @@
     <!--https://stackoverflow.com/questions/48896443/an-assembly-specified-in-the-application-dependencies-manifest-was-not-fou-->
     <IsTestProject>false</IsTestProject>
   </PropertyGroup>
-
-
+	
   <ItemGroup>
-    <None Include="**\*.shared.cs" />
+		<Compile Remove="**\*.shared.cs" />
+    <None Update="**\*.shared.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Amusoft.Toolkit.Mvvm.Core\Amusoft.Toolkit.Mvvm.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="xunit.runner.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   
 
