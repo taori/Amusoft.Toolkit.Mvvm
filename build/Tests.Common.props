@@ -1,11 +1,13 @@
 ﻿<Project>
 
+	<PropertyGroup>
+		<TestProjectTargetFramework>net8.0</TestProjectTargetFramework>
+	</PropertyGroup>
 	<!-- TestProject PropertyGroup-->
 	<PropertyGroup Condition="'$(MSBuildProjectName)' != 'Amusoft.Toolkit.Mvvm.Tests.Shared'">
 		<XunitRunnerConfigPath>$(SolutionDir)..\tests\Amusoft.Toolkit.Mvvm.Tests.Shared\xunit.runner.json</XunitRunnerConfigPath>
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
-		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<OutputType>Exe</OutputType>
 		<IsTestProject>true</IsTestProject>
@@ -13,6 +15,7 @@
 
 	<ItemGroup>
 		<Using Include="Xunit" />
+		<Using Include="System.IO" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -43,6 +46,13 @@
 		<Content Update="$(XunitRunnerConfigPath)">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.Core.UnitTests"/>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.IntegrationTests"/>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.Tests.Shared"/>
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
 	</ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿<Project>
 	<PropertyGroup>
-		<VersionPrefix>0.1.0</VersionPrefix>
+		<VersionPrefix>0.2.0</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Copyright>Copyright © Amusoft 2025</Copyright>
 		<Authors>https://github.com/taori/Amusoft.Toolkit.Mvvm/graphs/contributors</Authors>
@@ -30,5 +30,19 @@
 	<ItemGroup Condition="'$(IsPackable)' == 'True'">
 		<None Include="..\..\README.md" Pack="True" PackagePath="\Resources"/>
 		<None Include="..\packageIcon.png" Pack="True" PackagePath="\Resources"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" PrivateAssets="all"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.Wpf"/>
+
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.Core.UnitTests"/>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.IntegrationTests"/>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.Wpf.IntegrationTests"/>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.Tests.Shared"/>
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
 	</ItemGroup>
 </Project>

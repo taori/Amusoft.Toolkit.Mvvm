@@ -4,11 +4,15 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Amusoft.Toolkit.Mvvm.Core;
 
-internal static class RegionRegister
+internal class RegionRegister : IRegionRegister
 {
-	private static readonly Dictionary<string, IRegionControl> RegionByName = new();
+	private readonly Dictionary<string, IRegionControl> RegionByName = new();
 
-	public static void RegisterRegion(IRegionControl? control)
+	internal static readonly RegionRegister Instance = new();
+
+	private RegionRegister(){}
+
+	public void RegisterRegion(IRegionControl? control)
 	{
 		if(control is null)
 			throw new ArgumentNullException(nameof(control));
@@ -16,7 +20,7 @@ internal static class RegionRegister
 		RegionByName[control.RegionName] = control;
 	}
 
-	public static bool TryGetRegion(string name, [NotNullWhen(true)] out IRegionControl? control)
+	public bool TryGetRegion(string name, [NotNullWhen(true)] out IRegionControl? control)
 	{
 		control = null;
 		if (!RegionByName.TryGetValue(name, out control))

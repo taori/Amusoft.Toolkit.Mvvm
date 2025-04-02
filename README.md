@@ -22,8 +22,12 @@
 
 [![.GitHub](https://github.com/taori/Amusoft.Toolkit.Mvvm/actions/workflows/CI.yml/badge.svg)](https://github.com/taori/Amusoft.Toolkit.Mvvm/actions/workflows/CI.yml)
 [![GitHub issues](https://img.shields.io/github/issues/taori/Amusoft.Toolkit.Mvvm)](https://github.com/taori/Amusoft.Toolkit.Mvvm/issues)
-[![NuGet version (Amusoft.Toolkit.Mvvm)](https://img.shields.io/nuget/v/Amusoft.Toolkit.Mvvm.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm/)
-[![NuGet version (Amusoft.Toolkit.Mvvm)](https://img.shields.io/nuget/vpre/Amusoft.Toolkit.Mvvm.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm/latest/prerelease)
+
+| Package | Release | Prerelease                                                                                                                                                                                  |
+|---------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Amusoft.Toolkit.Mvvm.Core        | [![NuGet version (Amusoft.Toolkit.Mvvm.Core)](https://img.shields.io/nuget/v/Amusoft.Toolkit.Mvvm.Core.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm.Core/)        | [![NuGet version (Amusoft.Toolkit.Mvvm.Core)](https://img.shields.io/nuget/vpre/Amusoft.Toolkit.Mvvm.Core.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm.Core/latest/prerelease) |
+| Amusoft.Toolkit.Mvvm.Wpf        | [![NuGet version (Amusoft.Toolkit.Mvvm.Wpf)](https://img.shields.io/nuget/v/Amusoft.Toolkit.Mvvm.Wpf.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm.Wpf/)        | [![NuGet version (Amusoft.Toolkit.Mvvm.Wpf)](https://img.shields.io/nuget/vpre/Amusoft.Toolkit.Mvvm.Wpf.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm.Wpf/latest/prerelease)  |
+
 
 <!--CoverageStart-->
 ![Code Coverage](https://img.shields.io/badge/Code%20Coverage-27%25-success?style=flat)
@@ -40,4 +44,4 @@ _Minimum allowed line rate is 1%_
 
 ## Description
 
-This template was generated using Amusoft.Templates
+This template was generated using [Amusoft.Templates](https://www.github.com/taori/Amusoft.Templates)

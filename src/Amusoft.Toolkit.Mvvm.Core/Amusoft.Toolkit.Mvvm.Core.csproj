@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net5.0;net462</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
@@ -25,13 +25,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.Wpf"/>
-		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.UnitTests"/>
-		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.IntegrationTests"/>
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" PrivateAssets="all"/>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="[3.1.32,)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="[3.1.32,)" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.32" />

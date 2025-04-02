@@ -35,7 +35,7 @@ internal class RestorePropertyRestoreStrategyProvider : IRestoreStrategyProvider
 		public void CollectRestoreInformation(T model)
 		{
 			var properties = typeof(T)
-				.GetProperties(BindingFlags.GetProperty | BindingFlags.SetProperty | BindingFlags.Instance);
+				.GetProperties();
 			Storage = properties
 				.Where(d => CustomAttributeExtensions.GetCustomAttribute<RestorePropertyAttribute>(d) != null)
 				.Select(d => (accessor: d, originalValue: d.GetValue(model)))

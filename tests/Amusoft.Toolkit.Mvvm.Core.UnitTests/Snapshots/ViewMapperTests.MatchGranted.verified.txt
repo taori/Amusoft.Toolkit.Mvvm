@@ -1,0 +1,2 @@
+﻿Debug - Collecting patterns through NamespaceConventionViewModelToViewMapper.
+Trace - Mapping ViewMappingEngineTests.ViewModels.TestAVM to ViewMappingEngineTests.Views.TestAView

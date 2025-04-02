@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -14,7 +13,7 @@ internal abstract class NavigationModel
 
 	public Type ModelType { get; set; }
 	
-	public abstract bool TryGetModelInstance([NotNullWhen(true)] out object? model);
+	public abstract object? GetModel();
 }
 
 internal class NavigationModel<T> : NavigationModel where T : class
@@ -33,24 +32,22 @@ internal class NavigationModel<T> : NavigationModel where T : class
 
 	private WeakReference<T> _modelReference;
 
-	public override bool TryGetModelInstance([NotNullWhen(true)] out object? model)
+	public override object? GetModel()
 	{
-		model = null;
 		if (_modelReference.TryGetTarget(out var typedModel))
 		{
-			model = typedModel;
-			return true;			
+			return typedModel;		
 		}
 
-		var restoredModel = _restoreStrategies.OrderByDescending(d => d.Priority)
+		var restoredModel = _restoreStrategies
+			.OrderByDescending(d => d.Priority)
 			.FirstOrDefault()?
 			.Recreate();
 
 		if (restoredModel == null)
-			return false;
+			return null;
 
 		_modelReference = new WeakReference<T>(restoredModel);
-		model = restoredModel;
-		return true;
+		return restoredModel;
 	}
 }

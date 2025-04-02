@@ -1,0 +1,3 @@
+﻿Debug - Collecting patterns through NamespaceConventionViewModelToViewMapper.
+Warning - Found no match for view type TestBView
+Warning - Found no match for viewModel type TestAVM

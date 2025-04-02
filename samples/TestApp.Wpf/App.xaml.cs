@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-using Amusoft.Toolkit.Mvvm.Core;
+
 using Amusoft.Toolkit.Mvvm.Wpf;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -24,10 +19,12 @@ namespace TestApp.Wpf
 			sc.AddLogging(builder => builder.AddDebug());
 			sc.AddMvvmWpf(options =>
 			{
-				options.MappingInput
-					.WithAssembly(typeof(App).Assembly)
-					.WithViewFilter(d => d.FullName?.Contains(".Views.") ?? false)
-					.WithViewModelFilter(d => d.FullName?.Contains(".ViewModels.") ?? false);
+				options.ViewMappings
+					.AddDefaultPatterns()
+					.FromAssemblyConfiguration(configuration: source => source
+						.WithAssembly(typeof(App).Assembly)
+						.WithViewFilter(d => d.FullName?.Contains(".Views.") ?? false)
+						.WithViewModelFilter(d => d.FullName?.Contains(".ViewModels.") ?? false));
 			});
 			sc.AddTransient<ViewAVM>();
 			sc.AddTransient<ViewBVM>();
@@ -35,7 +32,7 @@ namespace TestApp.Wpf
 			sc.AddSingleton<MainVM>();
 			this.ServiceProvider = sc.BuildServiceProvider();
 
-			var templateSource = ServiceProvider.GetRequiredService<IDataTemplateResourceAppender>();
+			var templateSource = ServiceProvider.GetRequiredService<IResourceDictionaryTemplateAppender>();
 			templateSource.AppendTo(Current.Resources);
 			base.OnStartup(e);
 		}
@@ -47,6 +44,6 @@ namespace TestApp.Wpf
 			base.OnActivated(e);
 		}
 
-		public ServiceProvider ServiceProvider { get; set; } = null!;
+		public IServiceProvider ServiceProvider { get; set; } = null!;
 	}
 }

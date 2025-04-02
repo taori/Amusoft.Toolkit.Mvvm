@@ -1,4 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>$(TestProjectTargetFramework)</TargetFrameworks>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Amusoft.Toolkit.Mvvm.Core\Amusoft.Toolkit.Mvvm.Core.csproj" />

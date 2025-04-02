@@ -6,7 +6,7 @@
 public class MvvmOptions
 {
 	/// <summary>
-	/// Mapping input
+	/// Configuration of view mappings
 	/// </summary>
-	public MvvmMappingInput MappingInput { get; } = new MvvmMappingInput();
+	public ViewMappings ViewMappings { get; set; } = new();
 }
