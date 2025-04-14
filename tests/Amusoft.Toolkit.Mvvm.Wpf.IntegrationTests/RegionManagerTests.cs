@@ -32,7 +32,7 @@ public class RegionManagerTests : IntegrationTestBase
 		await ThreadHelper.RunAsStaThreadAsync(() =>
 			{
 				var contentControl = new ContentControl();
-				var ex = Assert.Throws<RegionManagerException>(() => RegionManager.SetRegionName(contentControl, regionName));
+				var ex = Assert.Throws<RegionManagerException>(() => RegionManager.SetRegionName(contentControl, regionName!));
 				ex.Message.ShouldBe("RegionName must be a string of length > 0");
 			}
 		);

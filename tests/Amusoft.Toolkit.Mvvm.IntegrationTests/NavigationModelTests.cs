@@ -62,7 +62,7 @@ public class NavigationModelTests : IntegrationTestBase
 	}
 
 	[Fact]
-	public async Task TargetModelCanBeDisposed()
+	public void TargetModelCanBeDisposed()
 	{
 		var baseline = dotMemory.Check(memory => memory
 			.GetObjects(d => 
@@ -151,7 +151,7 @@ public class NavigationModelTests : IntegrationTestBase
 		public Guid Id { get; set; }
 
 		[RestoreProperty]
-		public string SomeText { get; set; }
+		public string? SomeText { get; set; }
 
 		public void Dispose()
 		{

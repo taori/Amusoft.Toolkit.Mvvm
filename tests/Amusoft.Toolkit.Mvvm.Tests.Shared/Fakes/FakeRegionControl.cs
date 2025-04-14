@@ -4,7 +4,7 @@ namespace Amusoft.Toolkit.Mvvm.Tests.Shared.Fakes;
 
 internal class FakeRegionControl : IRegionControl
 {
-	private readonly WeakReference<object> _content = new(null);
+	private readonly WeakReference<object?> _content = new(null);
 	public FakeRegionControl(string regionName, object? content)
 	{
 		RegionName = regionName;

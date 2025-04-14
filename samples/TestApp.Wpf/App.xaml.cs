@@ -20,8 +20,7 @@ namespace TestApp.Wpf
 			sc.AddMvvmWpf(options =>
 			{
 				options.ViewMappings
-					.AddDefaultPatterns()
-					.FromAssemblyConfiguration(configuration: source => source
+					.WithAssemblyConfiguration(configuration: source => source
 						.WithAssembly(typeof(App).Assembly)
 						.WithViewFilter(d => d.FullName?.Contains(".Views.") ?? false)
 						.WithViewModelFilter(d => d.FullName?.Contains(".ViewModels.") ?? false));
@@ -32,8 +31,8 @@ namespace TestApp.Wpf
 			sc.AddSingleton<MainVM>();
 			this.ServiceProvider = sc.BuildServiceProvider();
 
-			var templateSource = ServiceProvider.GetRequiredService<IResourceDictionaryTemplateAppender>();
-			templateSource.AppendTo(Current.Resources);
+			var viewMapper = ServiceProvider.GetRequiredService<IViewMapper>();
+			viewMapper.Map(Resources);
 			base.OnStartup(e);
 		}
 

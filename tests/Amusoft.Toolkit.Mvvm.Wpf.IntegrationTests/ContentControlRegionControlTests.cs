@@ -39,7 +39,7 @@ public class ContentControlRegionControlTests : IntegrationTestBase
 	{
 		await ThreadHelper.RunAsStaThreadAsync(() =>
 			{
-				var ex = Assert.Throws<ArgumentNullException>(() => new ContentControlRegionControl(new ContentControl(), null));
+				var ex = Assert.Throws<ArgumentNullException>(() => new ContentControlRegionControl(new ContentControl(), null!));
 				ex.ParamName.ShouldBe("regionName");
 			}
 		);
