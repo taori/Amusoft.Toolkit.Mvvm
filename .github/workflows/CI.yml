@@ -68,7 +68,7 @@ on:
 jobs:
 
   parameters:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     
     outputs:
       versionSuffix: ${{ steps.parameters.outputs.versionSuffix }}
@@ -170,6 +170,7 @@ jobs:
       testArguments: "--filter Category!=SkipInCI"
       concurrencyAbortable: true
       coverageThreshold: '80 90'
+      agentEnv: ubuntu-22.04
       dotnetVersion: |
         5.0.x
         6.0.x
