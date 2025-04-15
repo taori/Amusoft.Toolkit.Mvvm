@@ -155,8 +155,8 @@ jobs:
     needs: parameters
     uses: taori/actions/.github/workflows/nupkg.yml@v9
     with:
-      solutionPath: src\Amusoft.Toolkit.Mvvm.sln
-      packProjects: src\Amusoft.Toolkit.Mvvm.Wpf\Amusoft.Toolkit.Mvvm.Wpf.csproj;src\Amusoft.Toolkit.Mvvm.Core\Amusoft.Toolkit.Mvvm.Core.csproj
+      solutionPath: src/Amusoft.Toolkit.Mvvm.sln
+      packProjects: src/Amusoft.Toolkit.Mvvm.Wpf/Amusoft.Toolkit.Mvvm.Wpf.csproj;src/Amusoft.Toolkit.Mvvm.Core/Amusoft.Toolkit.Mvvm.Core.csproj
       versionSuffix: ${{ needs.parameters.outputs.versionSuffix }}
       versionPrefix: ${{ needs.parameters.outputs.versionPrefix }}
       package: ${{ needs.parameters.outputs.package == 'true' }}
@@ -170,7 +170,6 @@ jobs:
       testArguments: "--filter Category!=SkipInCI"
       concurrencyAbortable: true
       coverageThreshold: '80 90'
-      agentEnv: windows-latest
       dotnetVersion: |
         5.0.x
         6.0.x
