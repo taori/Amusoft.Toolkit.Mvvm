@@ -170,6 +170,7 @@ jobs:
       testArguments: "--filter Category!=SkipInCI"
       concurrencyAbortable: true
       coverageThreshold: '80 90'
+      agentEnv: windows-latest
       dotnetVersion: |
         5.0.x
         6.0.x
