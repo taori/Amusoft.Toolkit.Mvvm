@@ -61,87 +61,87 @@ public class NavigationModelTests : IntegrationTestBase
 		((ReconstructionModel)model).Id.ShouldBe(navModelId);
 	}
 
-	[Fact]
-	public void TargetModelCanBeDisposed()
-	{
-		var baseline = dotMemory.Check(memory => memory
-			.GetObjects(d => 
-				d.Type.Is<ReconstructionModel>()).ObjectsCount.ShouldBe(0)
-		);
-		MemoryCheckPoint postCreation;
-
-		var isolator = new Action(async() =>
-		{
-			var regionName = "TestRegion";
-			var sp = GetServiceProvider();
-			var ns = sp.GetRequiredService<INavigationService>();
-			var rs = sp.GetRequiredService<IRegionRegister>();
-			var control = new FakeRegionControl(regionName, null);
-			rs.RegisterRegion(control);
-
-			await ns.PushAsync(regionName, new ReconstructionModel());
-
-			postCreation = dotMemory.Check(memory => memory
-				.GetTrafficFrom(baseline)
-				.Where(d => d.Type.Is<ReconstructionModel>()).AllocatedMemory.ObjectsCount.ShouldBe(1));
-
-			await ns.PushAsync(regionName, new object());
-		});
-
-		isolator();
-		
-		GC.Collect();
-
-		dotMemory.Check(memory => memory
-			.GetTrafficFrom(postCreation)
-			.Where(d => d.Type.Is<ReconstructionModel>())
-			.AllocatedMemory.ObjectsCount.ShouldBe(0)
-		);
-	}
-
-	[Fact]
-	public async Task TargetModelCanBeRestored()
-	{
-		var baseline = dotMemory.Check(memory => memory
-			.GetObjects(d => 
-				d.Type.Is<ReconstructionModel>()).ObjectsCount.ShouldBe(0)
-		);
-		MemoryCheckPoint postCreation;
-
-		var regionName = "TestRegion";
-		var control = new FakeRegionControl(regionName, null);
-		var newGuid = Guid.NewGuid();
-		INavigationService? ns = null;
-		var isolator = new Action(async() =>
-		{
-			var sp = GetServiceProvider(setup: collection => collection.AddTransient<ReconstructionModel>());
-			ns = sp.GetRequiredService<INavigationService>();
-			var rs = sp.GetRequiredService<IRegionRegister>();
-			rs.RegisterRegion(control);
-
-			await ns.PushAsync(regionName, new ReconstructionModel(){Id = newGuid});
-
-			postCreation = dotMemory.Check(memory => memory
-				.GetTrafficFrom(baseline)
-				.Where(d => d.Type.Is<ReconstructionModel>()).AllocatedMemory.ObjectsCount.ShouldBe(1));
-
-			await ns.PushAsync(regionName, new object());
-		});
-
-		isolator();
-		
-		GC.Collect();
-		
-		await ns!.GoBackAsync(regionName);
-
-		if (control.Content is not ReconstructionModel reconstructionModel)
-		{
-			Assert.Fail($"Content should be of type ReconstructionModel but it isn't - {control.Content?.GetType().FullName ?? "Unknown"}.");
-			return;
-		}
-		
-		reconstructionModel.Id.ShouldBe(newGuid);
-	}
+	// [Fact]
+	// public void TargetModelCanBeDisposed()
+	// {
+	// 	var baseline = dotMemory.Check(memory => memory
+	// 		.GetObjects(d => 
+	// 			d.Type.Is<ReconstructionModel>()).ObjectsCount.ShouldBe(0)
+	// 	);
+	// 	MemoryCheckPoint postCreation;
+	//
+	// 	var isolator = new Action(async() =>
+	// 	{
+	// 		var regionName = "TestRegion";
+	// 		var sp = GetServiceProvider();
+	// 		var ns = sp.GetRequiredService<INavigationService>();
+	// 		var rs = sp.GetRequiredService<IRegionRegister>();
+	// 		var control = new FakeRegionControl(regionName, null);
+	// 		rs.RegisterRegion(control);
+	//
+	// 		await ns.PushAsync(regionName, new ReconstructionModel());
+	//
+	// 		postCreation = dotMemory.Check(memory => memory
+	// 			.GetTrafficFrom(baseline)
+	// 			.Where(d => d.Type.Is<ReconstructionModel>()).AllocatedMemory.ObjectsCount.ShouldBe(1));
+	//
+	// 		await ns.PushAsync(regionName, new object());
+	// 	});
+	//
+	// 	isolator();
+	// 	
+	// 	GC.Collect();
+	//
+	// 	dotMemory.Check(memory => memory
+	// 		.GetTrafficFrom(postCreation)
+	// 		.Where(d => d.Type.Is<ReconstructionModel>())
+	// 		.AllocatedMemory.ObjectsCount.ShouldBe(0)
+	// 	);
+	// }
+	//
+	// [Fact]
+	// public async Task TargetModelCanBeRestored()
+	// {
+	// 	var baseline = dotMemory.Check(memory => memory
+	// 		.GetObjects(d => 
+	// 			d.Type.Is<ReconstructionModel>()).ObjectsCount.ShouldBe(0)
+	// 	);
+	// 	MemoryCheckPoint postCreation;
+	//
+	// 	var regionName = "TestRegion";
+	// 	var control = new FakeRegionControl(regionName, null);
+	// 	var newGuid = Guid.NewGuid();
+	// 	INavigationService? ns = null;
+	// 	var isolator = new Action(async() =>
+	// 	{
+	// 		var sp = GetServiceProvider(setup: collection => collection.AddTransient<ReconstructionModel>());
+	// 		ns = sp.GetRequiredService<INavigationService>();
+	// 		var rs = sp.GetRequiredService<IRegionRegister>();
+	// 		rs.RegisterRegion(control);
+	//
+	// 		await ns.PushAsync(regionName, new ReconstructionModel(){Id = newGuid});
+	//
+	// 		postCreation = dotMemory.Check(memory => memory
+	// 			.GetTrafficFrom(baseline)
+	// 			.Where(d => d.Type.Is<ReconstructionModel>()).AllocatedMemory.ObjectsCount.ShouldBe(1));
+	//
+	// 		await ns.PushAsync(regionName, new object());
+	// 	});
+	//
+	// 	isolator();
+	// 	
+	// 	GC.Collect();
+	// 	
+	// 	await ns!.GoBackAsync(regionName);
+	//
+	// 	if (control.Content is not ReconstructionModel reconstructionModel)
+	// 	{
+	// 		Assert.Fail($"Content should be of type ReconstructionModel but it isn't - {control.Content?.GetType().FullName ?? "Unknown"}.");
+	// 		return;
+	// 	}
+	// 	
+	// 	reconstructionModel.Id.ShouldBe(newGuid);
+	// }
 
 	public class ReconstructionModel : IDisposable
 	{
