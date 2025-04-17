@@ -7,11 +7,14 @@ namespace Amusoft.Toolkit.Mvvm.Core;
 /// </summary>
 public class MvvmCoreException : Exception
 {
-	internal MvvmCoreException(string? message) : base(message)
+	/// <summary>
+	/// Constructor for unit test purposes
+	/// </summary>
+	public MvvmCoreException()
 	{
 	}
 
-	internal MvvmCoreException(string? message, Exception? innerException) : base(message, innerException)
+	internal MvvmCoreException(string? message) : base(message)
 	{
 	}
 }

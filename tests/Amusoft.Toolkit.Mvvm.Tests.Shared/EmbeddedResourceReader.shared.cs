@@ -1,3 +1,4 @@
+using System.IO;
 using System.Reflection;
 
 namespace Amusoft.Toolkit.Mvvm.Tests.Shared;

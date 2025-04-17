@@ -1,23 +1,27 @@
 ﻿<Project>
 
+	<PropertyGroup>
+		<TestProjectTargetFramework>net8.0</TestProjectTargetFramework>
+	</PropertyGroup>
 	<!-- TestProject PropertyGroup-->
 	<PropertyGroup Condition="'$(MSBuildProjectName)' != 'Amusoft.Toolkit.Mvvm.Tests.Shared'">
 		<XunitRunnerConfigPath>$(SolutionDir)..\tests\Amusoft.Toolkit.Mvvm.Tests.Shared\xunit.runner.json</XunitRunnerConfigPath>
 		<Nullable>enable</Nullable>
 		<IsPackable>false</IsPackable>
-		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<OutputType>Exe</OutputType>
 		<IsTestProject>true</IsTestProject>
+		<NoWarn>CS8887</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Using Include="Xunit" />
+		<Using Include="System.IO" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-		<PackageReference Include="xunit.v3" Version="2.0.0" />
+		<PackageReference Include="xunit.v3" Version="2.0.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="3.0.2" >
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
@@ -30,7 +34,8 @@
 		
 		<PackageReference Include="Moq" Version="4.20.72" />
 		<PackageReference Include="Shouldly" Version="4.3.0" />
-		<PackageReference Include="Verify.XunitV3" Version="28.15.0" />
+		<PackageReference Include="Verify.XunitV3" Version="29.2.0" />
+		<PackageReference Include="xunit.v3.extensibility.core" Version="2.0.1" />
 	</ItemGroup>
 
 	<!-- TestProject ItemGroup-->
@@ -43,6 +48,13 @@
 		<Content Update="$(XunitRunnerConfigPath)">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.Core.UnitTests"/>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.IntegrationTests"/>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Mvvm.Tests.Shared"/>
+		<InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
 	</ItemGroup>
 
 </Project>

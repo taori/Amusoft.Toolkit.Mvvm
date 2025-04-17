@@ -22,22 +22,27 @@
 
 [![.GitHub](https://github.com/taori/Amusoft.Toolkit.Mvvm/actions/workflows/CI.yml/badge.svg)](https://github.com/taori/Amusoft.Toolkit.Mvvm/actions/workflows/CI.yml)
 [![GitHub issues](https://img.shields.io/github/issues/taori/Amusoft.Toolkit.Mvvm)](https://github.com/taori/Amusoft.Toolkit.Mvvm/issues)
-[![NuGet version (Amusoft.Toolkit.Mvvm)](https://img.shields.io/nuget/v/Amusoft.Toolkit.Mvvm.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm/)
-[![NuGet version (Amusoft.Toolkit.Mvvm)](https://img.shields.io/nuget/vpre/Amusoft.Toolkit.Mvvm.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm/latest/prerelease)
+
+| Package | Release | Prerelease                                                                                                                                                                                  |
+|---------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Amusoft.Toolkit.Mvvm.Core        | [![NuGet version (Amusoft.Toolkit.Mvvm.Core)](https://img.shields.io/nuget/v/Amusoft.Toolkit.Mvvm.Core.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm.Core/)        | [![NuGet version (Amusoft.Toolkit.Mvvm.Core)](https://img.shields.io/nuget/vpre/Amusoft.Toolkit.Mvvm.Core.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm.Core/latest/prerelease) |
+| Amusoft.Toolkit.Mvvm.Wpf        | [![NuGet version (Amusoft.Toolkit.Mvvm.Wpf)](https://img.shields.io/nuget/v/Amusoft.Toolkit.Mvvm.Wpf.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm.Wpf/)        | [![NuGet version (Amusoft.Toolkit.Mvvm.Wpf)](https://img.shields.io/nuget/vpre/Amusoft.Toolkit.Mvvm.Wpf.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Mvvm.Wpf/latest/prerelease)  |
+
 
 <!--CoverageStart-->
-![Code Coverage](https://img.shields.io/badge/Code%20Coverage-27%25-success?style=flat)
+![Code Coverage](https://img.shields.io/badge/Code%20Coverage-100%25-success?style=flat)
 
 Package | Line Rate | Branch Rate | Health
 -------- | --------- | ----------- | ------
-Amusoft.Toolkit.Mvvm.Core | 27% | 14% | ✔
-**Summary** | **27%** (69 / 256) | **14%** (12 / 88) | ✔
+Amusoft.Toolkit.Mvvm.Core | 100% | 92% | ✔
+Amusoft.Toolkit.Mvvm.Wpf | 100% | 85% | ✔
+**Summary** | **100%** (356 / 356) | **91%** (113 / 124) | ✔
 
-_Minimum allowed line rate is 1%_
+_Minimum allowed line rate is 80%_
 
-[Coverage details](https://taori.github.io/Amusoft.Toolkit.Mvvm)
+[Coverage details]()
 <!--CoverageEnd-->
 
 ## Description
 
-This template was generated using Amusoft.Templates
+This template was generated using [Amusoft.Templates](https://www.github.com/taori/Amusoft.Templates)

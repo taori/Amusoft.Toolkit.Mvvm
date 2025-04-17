@@ -1,8 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+	<PropertyGroup>
+		<UseWpf>true</UseWpf>
+		<TargetFrameworks>net8.0-windows</TargetFrameworks>
+		<EnableWindowsTargeting>true</EnableWindowsTargeting>
+	</PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Amusoft.Toolkit.Mvvm.Core\Amusoft.Toolkit.Mvvm.Core.csproj" />
-    <ProjectReference Include="..\Amusoft.Toolkit.Mvvm.Tests.Shared\Amusoft.Toolkit.Mvvm.Tests.Shared.csproj"/>
+    <ProjectReference Include="..\..\src\Amusoft.Toolkit.Mvvm.Wpf\Amusoft.Toolkit.Mvvm.Wpf.csproj" />
+    <ProjectReference Include="..\Amusoft.Toolkit.Mvvm.Tests.Shared\Amusoft.Toolkit.Mvvm.Tests.Shared.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="JetBrains.dotMemoryUnit" Version="3.2.20220510" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+	</ItemGroup>
 
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System;
 using Amusoft.Toolkit.Mvvm.Core;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Amusoft.Toolkit.Mvvm.Wpf;
 
@@ -13,17 +14,10 @@ public static class ServiceCollectionExtensions
 	/// </summary>
 	/// <param name="services"></param>
 	/// <param name="setupAction"></param>
-	public static void AddMvvmWpf(this IServiceCollection services, Action<MvvmOptions>? setupAction = null)
+	public static void AddMvvmWpf(this IServiceCollection services, Action<MvvmOptions>? setupAction = default)
 	{
-		services.AddMvvmCoreServices();
-		services.AddSingleton<IDataTemplateResourceAppender, DataTemplateResourceAppender>();
-		if (setupAction == null)
-		{
-			services.AddOptions<MvvmOptions>();
-		}
-		else
-		{
-			services.Configure(setupAction);
-		}
+		services.AddMvvmCoreServices(setupAction);
+		services.AddSingleton<ITemplateGenerator, TemplateGenerator>();
+		services.AddSingleton<IViewMapper, ViewMapper>();
 	}
 }

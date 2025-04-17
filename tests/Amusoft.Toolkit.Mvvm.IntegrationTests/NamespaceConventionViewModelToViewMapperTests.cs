@@ -1,18 +1,16 @@
-using System.Data.Common;
 using Amusoft.Toolkit.Mvvm.Core;
 using Shouldly;
-using Xunit;
 
 namespace Amusoft.Toolkit.Mvvm.IntegrationTests
 {
-    public class NamespaceConventionPatternTests
+    public class NamespaceConventionViewModelToViewMapperTests
     {
         [Fact]
         public Task VerifyHasMatches()
         {
-            var pattern = new NamespaceConventionPattern();
-            var input = new MvvmMappingInput()
-                .WithAssembly(typeof(NamespaceConventionPatternTests).Assembly)
+            var pattern = new NamespaceConventionViewModelToViewMapper();
+            var input = new AssemblyMappingTypeSource()
+                .WithAssembly(typeof(NamespaceConventionViewModelToViewMapperTests).Assembly)
                 .WithViewFilter(d => d.FullName?.StartsWith("NamespaceConventionPatternTests") ?? false)
                 .WithViewModelFilter(d => d.FullName?.StartsWith("NamespaceConventionPatternTests") ?? false);
 

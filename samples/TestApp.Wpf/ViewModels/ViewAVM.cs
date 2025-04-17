@@ -11,7 +11,7 @@ public class ViewAVM : PageViewVM, INavigatedTo, INavigateFrom
 		Title = "This is View A";
 	}
 
-	public Task OnNavigatedToAsync(NavigatedToContext context)
+	public Task OnNavigatedToAsync(FromToNavigationContext context)
 	{
 		Title += $" - navigated from {context.PreviousModel?.GetType().Name ?? string.Empty}";
 		return Task.CompletedTask;

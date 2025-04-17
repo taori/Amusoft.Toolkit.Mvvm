@@ -1,0 +1,3 @@
+﻿Debug - Collecting patterns through IViewModelToViewMapperProxy.
+Trace - Mapping ViewMappingEngineTests.ViewModels.TestAVM to ViewMappingEngineTests.Views.TestAView
+Warning - Skipped adding mapping for ViewMappingEngineTests.ViewModels.TestAVM to ViewMappingEngineTests.Views.TestAView because that mapping already exists

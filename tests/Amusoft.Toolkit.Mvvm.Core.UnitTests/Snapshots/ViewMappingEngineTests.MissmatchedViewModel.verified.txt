@@ -1,0 +1,2 @@
+﻿Debug - Collecting patterns through NamespaceConventionViewModelToViewMapper.
+Warning - Found no match for viewModel type TestAVM

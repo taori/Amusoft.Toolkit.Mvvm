@@ -1,0 +1,4 @@
+﻿[
+  <DataTemplate DataType="{x:Type vm:TestModelAVM}"><v:TestModelAView /></DataTemplate>,
+  <DataTemplate DataType="{x:Type vm:TestModelBVM}"><v:TestModelBPage /></DataTemplate>
+]

@@ -20,10 +20,10 @@ public class RegionManager
 
 	private static void RegionNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
-		if(e.NewValue is not string regionName)
+		if(e.NewValue is not string regionName || string.IsNullOrWhiteSpace(regionName))
 			throw new RegionManagerException("RegionName must be a string of length > 0");
 		
-		RegionRegister.RegisterRegion(new ContentControlRegionControl(d as ContentControl, regionName));
+		RegionRegister.Instance.RegisterRegion(new ContentControlRegionControl(d as ContentControl, regionName));
 	}
 
 	/// <summary>

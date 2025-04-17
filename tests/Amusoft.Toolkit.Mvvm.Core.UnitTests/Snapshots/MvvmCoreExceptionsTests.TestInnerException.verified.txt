@@ -1,0 +1,9 @@
+﻿{
+  Type: MvvmCoreException,
+  Message: Testing the inner exception,
+  InnerException: {
+    $type: Exception,
+    Type: Exception,
+    Message: Content of inner exception
+  }
+}

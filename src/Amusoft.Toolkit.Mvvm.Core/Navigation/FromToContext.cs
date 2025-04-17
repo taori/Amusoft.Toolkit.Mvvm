@@ -3,9 +3,9 @@
 /// <summary>
 /// Provides context for a scenario where the current model is being entered
 /// </summary>
-public class NavigatedToContext
+public class FromToNavigationContext
 {
-	internal NavigatedToContext(object? previousModel)
+	internal FromToNavigationContext(object? previousModel)
 	{
 		PreviousModel = previousModel;
 	}
