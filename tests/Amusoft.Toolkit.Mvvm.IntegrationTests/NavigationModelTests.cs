@@ -112,12 +112,13 @@ public class NavigationModelTests : IntegrationTestBase
 		var control = new FakeRegionControl(regionName, null);
 		var newGuid = Guid.NewGuid();
 		INavigationService? ns = null;
+		IRegionRegister? rr = null;
 		var isolator = new Action(async() =>
 		{
 			var sp = GetServiceProvider(setup: collection => collection.AddTransient<ReconstructionModel>());
 			ns = sp.GetRequiredService<INavigationService>();
-			var rs = sp.GetRequiredService<IRegionRegister>();
-			rs.RegisterRegion(control);
+			rr = sp.GetRequiredService<IRegionRegister>();
+			rr.RegisterRegion(control);
 	
 			await ns.PushAsync(regionName, new ReconstructionModel(){Id = newGuid});
 	
