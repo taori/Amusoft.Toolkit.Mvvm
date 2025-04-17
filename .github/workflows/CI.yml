@@ -76,10 +76,8 @@ jobs:
       configuration: ${{ steps.parameters.outputs.configuration }}
       verbosity: ${{ steps.parameters.outputs.verbosity }}
       publish: ${{ steps.parameters.outputs.publish }}
-      package: ${{ steps.parameters.outputs.package }}
       publishSymbols: ${{ steps.parameters.outputs.publishSymbols }}
       removePrereleases: ${{ steps.parameters.outputs.removePrereleases }}
-      runTests: ${{ steps.parameters.outputs.runTests }}
       runCoverage: ${{ steps.parameters.outputs.runCoverage }}
 
     steps:
@@ -132,9 +130,7 @@ jobs:
               exit 1;
           }
 
-          $names += "package";
           $names += "publishSymbols";
-          $names += "runTests";
           $names += "runCoverage";
 
           $data[$commitMode] += $data[$commitMode][4]
@@ -150,31 +146,51 @@ jobs:
           }
           
           echo "Identified commit mode $commitMode" >> $env:GITHUB_STEP_SUMMARY
-
-  package:
-    needs: parameters
-    uses: taori/actions/.github/workflows/nupkg.yml@v9
+       
+  build:
+    needs: [ parameters ]
+    uses: taori/actions/.github/workflows/nupkg-build.yml@v9-windows-support
     with:
       solutionPath: src/Amusoft.Toolkit.Mvvm.sln
       packProjects: src/Amusoft.Toolkit.Mvvm.Wpf/Amusoft.Toolkit.Mvvm.Wpf.csproj;src/Amusoft.Toolkit.Mvvm.Core/Amusoft.Toolkit.Mvvm.Core.csproj
       versionSuffix: ${{ needs.parameters.outputs.versionSuffix }}
       versionPrefix: ${{ needs.parameters.outputs.versionPrefix }}
-      package: ${{ needs.parameters.outputs.package == 'true' }}
-      publish: ${{ needs.parameters.outputs.publish == 'true' }}
-      publishSymbols: ${{ needs.parameters.outputs.publishSymbols == 'true' }}
-      removePrereleases: ${{ needs.parameters.outputs.removePrereleases == 'true' }}
-      skipTests: ${{ needs.parameters.outputs.runTests == 'false' }}
       configuration: ${{ needs.parameters.outputs.configuration }}
       verbosity: ${{ needs.parameters.outputs.verbosity }}
-      runCoverage: ${{ needs.parameters.outputs.runCoverage == 'true' }}
       testArguments: "--filter Category!=SkipInCI"
       concurrencyAbortable: true
-      coverageThreshold: '80 90'
-      agentEnv: ubuntu-22.04
       dotnetVersion: |
         5.0.x
         6.0.x
         8.0.x
+      buildEnv: "windows-latest"
+
+  coverage:
+    if: ${{ needs.parameters.outputs.runCoverage == 'true' }}
+    needs: [ build, parameters ]
+    uses: taori/actions/.github/workflows/coverage.yml@v9-windows-support
+    with:
+      coberturaArtifactsName: ${{ needs.build.outputs.artifact-name-cobertura }}
+      threshold: '80 90'
+      debugWorkflow: false
+
+  updatePackage:
+    needs: [ build, coverage ]
+    uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v9-windows-support
+    with:
+      artifactName: ${{ needs.build.outputs.artifact-name-nupkg }}
+      readmePath: "./README.md"
+      readmeFileName: "README.md"
+      debugWorkflow: false
+
+  deploy:
+    needs: [ parameters, build, updatePackage ]
+    uses: taori/actions/.github/workflows/nupkg-publish.yml@v9-windows-support
+    if: ${{ needs.parameters.outputs.publish == 'true' }}
+    with:
+      nupkgArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
+      removePrereleases: ${{ needs.parameters.outputs.removePrereleases == 'true' }}
+      publishSymbols: ${{ needs.parameters.outputs.publishSymbols == 'true' }}
+      debugWorkflow: true
     secrets:
-      nuget: ${{ secrets.NUGET }}
-      
+      nuget: ${{ secrets.NUGET }} 
