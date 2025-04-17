@@ -178,6 +178,7 @@ jobs:
     uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v9-windows-support
     with:
       artifactName: ${{ needs.build.outputs.artifact-name-nupkg }}
+      newArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
       readmePath: "./README.md"
       readmeFileName: "README.md"
       debugWorkflow: false
