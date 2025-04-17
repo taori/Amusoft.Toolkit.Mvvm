@@ -166,7 +166,6 @@ jobs:
       buildEnv: "windows-latest"
 
   coverage:
-    if: ${{ needs.parameters.outputs.runCoverage == 'true' }}
     needs: [ build, parameters ]
     uses: taori/actions/.github/workflows/coverage.yml@v9-windows-support
     with:
