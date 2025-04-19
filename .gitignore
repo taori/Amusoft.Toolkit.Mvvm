@@ -5,6 +5,7 @@
 
 src/coveragereport/**
 src/merged.xml
+tmp/*
 # User-specific files
 *.rsuser
 *.suo

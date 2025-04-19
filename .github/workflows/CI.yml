@@ -68,7 +68,7 @@ on:
 jobs:
 
   parameters:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     
     outputs:
       versionSuffix: ${{ steps.parameters.outputs.versionSuffix }}
@@ -78,7 +78,6 @@ jobs:
       publish: ${{ steps.parameters.outputs.publish }}
       publishSymbols: ${{ steps.parameters.outputs.publishSymbols }}
       removePrereleases: ${{ steps.parameters.outputs.removePrereleases }}
-      runCoverage: ${{ steps.parameters.outputs.runCoverage }}
 
     steps:
 
@@ -116,40 +115,33 @@ jobs:
           if("${{github.event_name}}" -eq "workflow_dispatch" -and [string]::IsNullOrEmpty($suffix) -eq $false){
               $suffix = "$($suffix.TrimEnd(".")).$bnr" }
           
-          $data = @{          #prefix         #suffix         #configuration  #verbosity  #publish    #removeprerelease                       
-              "dispatch" =    @("$prefix",    "$suffix",      "$conf",        "$verb",    "$publ",    "$removePrereleases")
-              "push" =        @("",           "alpha.$bnr",   "Release",      "n",        "true",     "false")
-              "pushMerge" =   @("",           "beta.$bnr",    "Release",      "n",        "true",     "false")
-              "noop" =        @("",           "noop",         "Release",      "n",        "false",    "false")
-          };
-          $names = @("versionPrefix","versionSuffix","configuration","verbosity","publish","removePrereleases")
-          
-          if($data[$commitMode] -eq $null){
-              Write-Host "Unidentified commit mode $commitMode"
-              echo "Commit mode could not be identified." >> $env:GITHUB_STEP_SUMMARY
-              exit 1;
+          $json = @"
+          {
+            "prefix" :              {"push" : "",           "pushMerge" : "",           "noop" : "",        "dispatch" : "$prefix"},
+            "suffix" :              {"push" : "alpha.$bnr", "pushMerge" : "beta.$bnr",  "noop" : "noop",    "dispatch" : "$suffix"},
+            "configuration" :       {"push" : "Release",    "pushMerge" : "Release",    "noop" : "Release", "dispatch" : "$conf"},
+            "verbosity" :           {"push" : "n",          "pushMerge" : "n",          "noop" : "n",       "dispatch" : "$verb"},
+            "publish" :             {"push" : "true",       "pushMerge" : "true",       "noop" : "false",   "dispatch" : "$publ"},
+            "removePrereleases" :   {"push" : "false",      "pushMerge" : "false",      "noop" : "false",   "dispatch" : "$removePrereleases"},
+            "publishSymbols" :      {"push" : "true",       "pushMerge" : "true",       "noop" : "noop",    "dispatch" : "true"},
+            "runCoverage" :         {"push" : "true",       "pushMerge" : "true",       "noop" : "noop",    "dispatch" : "true"}
           }
-
-          $names += "publishSymbols";
-          $names += "runCoverage";
-
-          $data[$commitMode] += $data[$commitMode][4]
-          $data[$commitMode] += $data[$commitMode][4]
-          $data[$commitMode] += $data[$commitMode][4]
-          $data[$commitMode] += $data[$commitMode][4]
+          "@ | ConvertFrom-Json
           
-          foreach($item in $names){
-              $index = $names.IndexOf($item)
-              Write-Host "$item=$($data[$commitMode][$index])"
-              echo "$item=$($data[$commitMode][$index])" >> $env:GITHUB_OUTPUT
-              echo "$item=$($data[$commitMode][$index])" >> $env:GITHUB_STEP_SUMMARY
-          }
+          $props = $json.psobject.properties.name
           
+          Write-Host "Identified commit mode $commitMode"
           echo "Identified commit mode $commitMode" >> $env:GITHUB_STEP_SUMMARY
+          foreach($prop in $props){
+            Write-Host "$prop=$($json.$prop.$commitMode)"
+            echo "$prop=$($json.$prop.$commitMode)" >> $env:GITHUB_OUTPUT
+            echo "$prop=$($json.$prop.$commitMode)" >> $env:GITHUB_STEP_SUMMARY
+          }
+          
        
   build:
     needs: [ parameters ]
-    uses: taori/actions/.github/workflows/nupkg-build.yml@v9-windows-support
+    uses: taori/actions/.github/workflows/nupkg-build.yml@v10
     with:
       solutionPath: src/Amusoft.Toolkit.Mvvm.sln
       packProjects: src/Amusoft.Toolkit.Mvvm.Wpf/Amusoft.Toolkit.Mvvm.Wpf.csproj;src/Amusoft.Toolkit.Mvvm.Core/Amusoft.Toolkit.Mvvm.Core.csproj
@@ -167,7 +159,7 @@ jobs:
 
   coverage:
     needs: [ build, parameters ]
-    uses: taori/actions/.github/workflows/coverage.yml@v9-windows-support
+    uses: taori/actions/.github/workflows/coverage.yml@v10
     with:
       coberturaArtifactsName: ${{ needs.build.outputs.artifact-name-cobertura }}
       threshold: '80 90'
@@ -175,7 +167,7 @@ jobs:
 
   updatePackage:
     needs: [ build, coverage ]
-    uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v9-windows-support
+    uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v10
     with:
       artifactName: ${{ needs.build.outputs.artifact-name-nupkg }}
       newArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
@@ -185,12 +177,12 @@ jobs:
 
   deploy:
     needs: [ parameters, build, updatePackage ]
-    uses: taori/actions/.github/workflows/nupkg-publish.yml@v9-windows-support
+    uses: taori/actions/.github/workflows/nupkg-publish.yml@v10
     if: ${{ needs.parameters.outputs.publish == 'true' }}
     with:
       nupkgArtifactName: "${{ needs.build.outputs.artifact-name-nupkg }}-patched"
       removePrereleases: ${{ needs.parameters.outputs.removePrereleases == 'true' }}
       publishSymbols: ${{ needs.parameters.outputs.publishSymbols == 'true' }}
-      debugWorkflow: true
+      debugWorkflow: false
     secrets:
       nuget: ${{ secrets.NUGET }} 
