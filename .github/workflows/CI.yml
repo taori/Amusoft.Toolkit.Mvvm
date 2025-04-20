@@ -162,7 +162,7 @@ jobs:
     uses: taori/actions/.github/workflows/coverage.yml@v10
     with:
       coberturaArtifactsName: ${{ needs.build.outputs.artifact-name-cobertura }}
-      threshold: '80 90'
+      threshold: '90 95'
       debugWorkflow: false
 
   updatePackage:

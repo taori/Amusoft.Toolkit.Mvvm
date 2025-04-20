@@ -115,7 +115,12 @@ public class NavigationModelTests : IntegrationTestBase
 		IRegionRegister? rr = null;
 		var isolator = new Action(async() =>
 		{
-			var sp = GetServiceProvider(setup: collection => collection.AddTransient<ReconstructionModel>());
+			var sp = GetServiceProvider(setup: collection =>
+				{
+					collection.AddTransient<ReconstructionModel>();
+					collection.AddTransient<TestDummyModel>();
+				}
+			);
 			ns = sp.GetRequiredService<INavigationService>();
 			rr = sp.GetRequiredService<IRegionRegister>();
 			rr.RegisterRegion(control);
@@ -143,8 +148,44 @@ public class NavigationModelTests : IntegrationTestBase
 		
 		reconstructionModel.Id.ShouldBe(newGuid);
 	}
+	
+	[Theory]
+	[InlineData(true, true)]
+	[InlineData(false, false)]
+	public async Task RestoreCallbackVerification(bool dispose, bool expectedRestore)
+	{
+		var regionName = "TestRegion";
+		var control = new FakeRegionControl(regionName, null);
+		var newGuid = Guid.NewGuid();
+		INavigationService? ns = null;
+		IRegionRegister? rr = null;
+		var isolator = new Action(async() =>
+		{
+			var sp = GetServiceProvider(setup: collection => collection.AddTransient<ReconstructionModel>());
+			ns = sp.GetRequiredService<INavigationService>();
+			rr = sp.GetRequiredService<IRegionRegister>();
+			rr.RegisterRegion(control);
+			await ns.PushAsync(regionName, new ReconstructionModel() { Id = newGuid });
+			await ns.PushAsync(regionName, new object());
+		});
+	
+		isolator();
 
-	public class ReconstructionModel : IDisposable
+		if (dispose)
+			GC.Collect();
+		
+		await ns!.GoBackAsync(regionName);
+	
+		if (control.Content is not ReconstructionModel reconstructionModel)
+		{
+			Assert.Fail($"Content should be of type ReconstructionModel but it isn't - {control.Content?.GetType().FullName ?? "Unknown"}.");
+			return;
+		}
+		
+		reconstructionModel.RestoreCalled.ShouldBe(expectedRestore);
+	}
+
+	public class ReconstructionModel : IDisposable, IRestoreCallback
 	{
 		private byte[] bytes = new byte[100_000];
 		
@@ -154,9 +195,16 @@ public class NavigationModelTests : IntegrationTestBase
 		[RestoreProperty]
 		public string? SomeText { get; set; }
 
+		public bool RestoreCalled { get; set; }
+
 		public void Dispose()
 		{
 			GC.SuppressFinalize(this);
+		}
+
+		public void OnRestored()
+		{
+			RestoreCalled = true;
 		}
 	}
 }

@@ -8,5 +8,5 @@ public class MvvmOptions
 	/// <summary>
 	/// Configuration of view mappings
 	/// </summary>
-	public ViewMappings ViewMappings { get; set; } = new();
+	public ViewMappings ViewMappings { get; } = new();
 }
