@@ -78,6 +78,7 @@ jobs:
       publish: ${{ steps.parameters.outputs.publish }}
       publishSymbols: ${{ steps.parameters.outputs.publishSymbols }}
       removePrereleases: ${{ steps.parameters.outputs.removePrereleases }}
+      updateReadme: ${{ steps.parameters.outputs.updateReadme }}
 
     steps:
 
@@ -124,7 +125,8 @@ jobs:
             "publish" :             {"push" : "true",       "pushMerge" : "true",       "noop" : "false",   "dispatch" : "$publ"},
             "removePrereleases" :   {"push" : "false",      "pushMerge" : "false",      "noop" : "false",   "dispatch" : "$removePrereleases"},
             "publishSymbols" :      {"push" : "true",       "pushMerge" : "true",       "noop" : "noop",    "dispatch" : "true"},
-            "runCoverage" :         {"push" : "true",       "pushMerge" : "true",       "noop" : "noop",    "dispatch" : "true"}
+            "runCoverage" :         {"push" : "true",       "pushMerge" : "true",       "noop" : "noop",    "dispatch" : "true"},
+            "updateReadme" :        {"push" : "true",       "pushMerge" : "true",       "noop" : "false",   "dispatch" : "$publ"},
           }
           "@ | ConvertFrom-Json
           
@@ -166,7 +168,8 @@ jobs:
       debugWorkflow: false
 
   updatePackage:
-    needs: [ build, coverage ]
+    if: ${{ needs.parameters.outputs.updateReadme }}
+    needs: [ parameters, build, coverage ]
     uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v10
     with:
       artifactName: ${{ needs.build.outputs.artifact-name-nupkg }}
