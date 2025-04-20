@@ -168,7 +168,7 @@ jobs:
       debugWorkflow: false
 
   updatePackage:
-    if: ${{ needs.parameters.outputs.updateReadme }}
+    if: ${{ needs.parameters.outputs.updateReadme == 'true' }}
     needs: [ parameters, build, coverage ]
     uses: taori/actions/.github/workflows/nupkg-update-readme.yml@v10
     with:
