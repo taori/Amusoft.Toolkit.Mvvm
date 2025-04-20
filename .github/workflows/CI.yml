@@ -71,8 +71,8 @@ jobs:
     runs-on: ubuntu-latest
     
     outputs:
-      versionSuffix: ${{ steps.parameters.outputs.versionSuffix }}
-      versionPrefix: ${{ steps.parameters.outputs.versionPrefix }}
+      suffix: ${{ steps.parameters.outputs.suffix }}
+      prefix: ${{ steps.parameters.outputs.prefix }}
       configuration: ${{ steps.parameters.outputs.configuration }}
       verbosity: ${{ steps.parameters.outputs.verbosity }}
       publish: ${{ steps.parameters.outputs.publish }}
@@ -147,8 +147,8 @@ jobs:
     with:
       solutionPath: src/Amusoft.Toolkit.Mvvm.sln
       packProjects: src/Amusoft.Toolkit.Mvvm.Wpf/Amusoft.Toolkit.Mvvm.Wpf.csproj;src/Amusoft.Toolkit.Mvvm.Core/Amusoft.Toolkit.Mvvm.Core.csproj
-      versionSuffix: ${{ needs.parameters.outputs.versionSuffix }}
-      versionPrefix: ${{ needs.parameters.outputs.versionPrefix }}
+      versionSuffix: ${{ needs.parameters.outputs.suffix }}
+      versionPrefix: ${{ needs.parameters.outputs.prefix }}
       configuration: ${{ needs.parameters.outputs.configuration }}
       verbosity: ${{ needs.parameters.outputs.verbosity }}
       testArguments: "--filter Category!=SkipInCI"
