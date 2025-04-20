@@ -9,9 +9,9 @@ namespace Amusoft.Toolkit.Mvvm.IntegrationTests.Extensions;
 
 public static class TestSetupExtensions
 {
-	public static void AddIntegrationTestDefaults(this IServiceCollection serviceCollection)
+	public static void AddIntegrationTestDefaults(this IServiceCollection serviceCollection, Action<MvvmOptions>? mvvmServiceConfig = default)
 	{
 		serviceCollection.AddLogging(d => d.AddDebug());
-		serviceCollection.AddMvvmCoreServices();
+		serviceCollection.AddMvvmCoreServices(mvvmServiceConfig);
 	}
 }

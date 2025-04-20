@@ -6,13 +6,6 @@ namespace Amusoft.Toolkit.Mvvm.Core;
 
 internal abstract class NavigationModel
 {
-	public NavigationModel(Type modelType)
-	{
-		ModelType = modelType;
-	}
-
-	public Type ModelType { get; set; }
-	
 	public abstract object? GetModel();
 }
 
@@ -20,7 +13,7 @@ internal class NavigationModel<T> : NavigationModel where T : class
 {
 	private readonly IRestoreStrategy<T>[] _restoreStrategies;
 
-	public NavigationModel(T model, IRestoreStrategy<T>[] restoreStrategies) : base(model.GetType())
+	public NavigationModel(T model, IRestoreStrategy<T>[] restoreStrategies)
 	{
 		_restoreStrategies = restoreStrategies;
 		_modelReference = new WeakReference<T>(model);
@@ -47,6 +40,9 @@ internal class NavigationModel<T> : NavigationModel where T : class
 		if (restoredModel == null)
 			return null;
 
+		if(restoredModel is IRestoreCallback restoreCallback)
+			restoreCallback.OnRestored();
+		
 		_modelReference = new WeakReference<T>(restoredModel);
 		return restoredModel;
 	}

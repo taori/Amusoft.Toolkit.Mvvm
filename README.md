@@ -34,11 +34,11 @@
 
 Package | Line Rate | Branch Rate | Health
 -------- | --------- | ----------- | ------
-Amusoft.Toolkit.Mvvm.Core | 100% | 92% | ✔
+Amusoft.Toolkit.Mvvm.Core | 100% | 93% | ✔
 Amusoft.Toolkit.Mvvm.Wpf | 100% | 85% | ✔
-**Summary** | **100%** (356 / 356) | **91%** (113 / 124) | ✔
+**Summary** | **100%** (357 / 357) | **92%** (116 / 126) | ✔
 
-_Minimum allowed line rate is 80%_
+_Minimum allowed line rate is 90%_
 
 [Coverage details]()
 <!--CoverageEnd-->

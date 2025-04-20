@@ -3,6 +3,10 @@
 using Amusoft.Toolkit.Mvvm.Core;
 using Amusoft.Toolkit.Mvvm.Tests.Shared.Fakes;
 
+using Microsoft.Extensions.Options;
+
+using Moq;
+
 using NamespaceConventionViewModel.ViewModels;
 
 using Shouldly;
@@ -16,8 +20,11 @@ namespace Amusoft.Toolkit.Mvvm.Core.UnitTests
 		[Fact]
 		public void ViewPatternRequiresMatchGroup()
 		{
-			var matcher = new NamespaceConventionViewModelToViewMapper();
-			matcher.ViewPattern = new(".+");
+			var options = new NamespaceConventionOptions();
+			options.ViewPattern = new(".+");
+			var mockOptions = new Mock<IOptions<NamespaceConventionOptions>>();
+			mockOptions.Setup(d => d.Value).Returns(options);
+			var matcher = new NamespaceConventionViewModelToViewMapper(mockOptions.Object);
 			var ex = Assert.Throws<MvvmCoreException>(() => matcher.GetResult(new MockedMappingTypeSource([typeof(TestAVM)], [typeof(TestAView)])));
 			ex.Message.ShouldBe("The regex group \"match\" is missing.");
 		}
@@ -25,8 +32,11 @@ namespace Amusoft.Toolkit.Mvvm.Core.UnitTests
 		[Fact]
 		public void ViewModelPatternRequiresMatchGroup()
 		{
-			var matcher = new NamespaceConventionViewModelToViewMapper();
-			matcher.ViewModelPattern = new(".+");
+			var options = new NamespaceConventionOptions();
+			options.ViewModelPattern = new(".+");
+			var mockOptions = new Mock<IOptions<NamespaceConventionOptions>>();
+			mockOptions.Setup(d => d.Value).Returns(options);
+			var matcher = new NamespaceConventionViewModelToViewMapper(mockOptions.Object);
 			var ex = Assert.Throws<MvvmCoreException>(() => matcher.GetResult(new MockedMappingTypeSource([typeof(TestAVM)], [typeof(TestAView)])));
 			ex.Message.ShouldBe("The regex group \"match\" is missing.");
 		}
