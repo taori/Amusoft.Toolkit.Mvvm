@@ -137,16 +137,20 @@ public class NavigationModelTests : IntegrationTestBase
 		isolator();
 		
 		GC.Collect();
+
+		dotMemory.Check(memory => memory
+			.GetObjects(d =>
+				d.Type.Is<ReconstructionModel>()
+			).ObjectsCount.ShouldBe(0)
+		);
 		
 		await ns!.GoBackAsync(regionName);
-	
-		if (control.Content is not ReconstructionModel reconstructionModel)
-		{
-			Assert.Fail($"Content should be of type ReconstructionModel but it isn't - {control.Content?.GetType().FullName ?? "Unknown"}.");
-			return;
-		}
 		
-		reconstructionModel.Id.ShouldBe(newGuid);
+		dotMemory.Check(memory => memory
+			.GetObjects(d =>
+				d.Type.Is<ReconstructionModel>()
+			).ObjectsCount.ShouldBe(1)
+		);
 	}
 	
 	[Theory]
