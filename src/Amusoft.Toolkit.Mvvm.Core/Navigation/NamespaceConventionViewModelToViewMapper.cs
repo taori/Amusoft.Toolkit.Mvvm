@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
+using Microsoft.Extensions.Options;
+
 namespace Amusoft.Toolkit.Mvvm.Core;
 
 /// <summary>
@@ -10,28 +12,16 @@ namespace Amusoft.Toolkit.Mvvm.Core;
 /// </summary>
 public class NamespaceConventionViewModelToViewMapper : IViewModelToViewMapper
 {
-	/// <summary>
-	/// Wildcard to match the start of namespace mapping e.g. "ViewModels"
-	/// <para>The default is: .+\.ViewModels\.(?&lt;match>.+)</para>
-	/// </summary>
-	public Regex ViewModelPattern { get; set; } = new(@".+\.ViewModels\.(?<match>.+)", RegexOptions.Compiled | RegexOptions.Singleline, TimeSpan.FromSeconds(1));
+	private readonly NamespaceConventionOptions _options;
 
 	/// <summary>
-	/// Removes the end parts from a full name
-	/// <para>The default is: (?:ViewModel|Model|VM)</para>
+	/// Constructor for DI
 	/// </summary>
-	public Regex ViewModelTruncateEndPattern { get; set; } = new(@"(?:ViewModel|Model|VM)$", RegexOptions.Compiled | RegexOptions.Singleline, TimeSpan.FromSeconds(1));
-
-	/// <summary>
-	/// <para>Wildcard to match the start of namespace mapping e.g. "Views"</para>
-	/// <para>The default is: .+\.Views\.(?&lt;match>.+)</para>
-	/// </summary>
-	public Regex ViewPattern { get; set; } = new(@".+\.Views\.(?<match>.+)", RegexOptions.Compiled | RegexOptions.Singleline, TimeSpan.FromSeconds(1));
-
-	/// <summary>
-	/// Removes the end parts from a full name
-	/// </summary>
-	public Regex ViewTruncateEndPattern { get; set; } = new(@"(?:Page|View)$", RegexOptions.Compiled | RegexOptions.Singleline, TimeSpan.FromSeconds(1));
+	/// <param name="options"></param>
+	public NamespaceConventionViewModelToViewMapper(IOptions<NamespaceConventionOptions> options)
+	{
+		_options = options.Value;
+	}
 
 	/// <summary>
 	/// 
@@ -60,11 +50,11 @@ public class NamespaceConventionViewModelToViewMapper : IViewModelToViewMapper
 		}
 
 		var viewMap = viewTypes
-			.Select(d => (type: d, name: GetMatchingName(d.FullName!, ViewPattern, ViewTruncateEndPattern)))
+			.Select(d => (type: d, name: GetMatchingName(d.FullName!, _options.ViewPattern, _options.ViewTruncateEndPattern)))
 			.Where(d => d.name != null)
 			.ToDictionary(d => d.name!, d => d.type);
 		var viewModelMap = modelTypes
-			.Select(d => (type: d, name: GetMatchingName(d.FullName!, ViewModelPattern, ViewModelTruncateEndPattern)))
+			.Select(d => (type: d, name: GetMatchingName(d.FullName!, _options.ViewModelPattern, _options.ViewModelTruncateEndPattern)))
 			.Where(d => d.name != null)
 			.ToDictionary(d => d.name!, d => d.type);
 
