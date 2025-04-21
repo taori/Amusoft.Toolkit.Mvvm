@@ -11,6 +11,7 @@
 - Similar to Prism this package provides a RegionManager to register a view as a region that can be interacted with by
 	using the INavigationService.
 - The methods are pretty self explanatory and i recommend you have a look at the samples [here](./samples/TestApp.Wpf/)
+- See [GettingStarted](docs/GettingStarted.md)
 
 ## Why another MVVM framework?
 
