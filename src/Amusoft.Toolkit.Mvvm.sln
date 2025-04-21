@@ -13,18 +13,9 @@ Project("{CB6BBB7F-D474-4FC1-BEAB-451C59EC984C}") = "Amusoft.Toolkit.Mvvm.Integr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "package", "package", "{CB6BBB7F-D474-4FC1-BEAB-451C59EC984C}"
 	ProjectSection(SolutionItems) = preProject
-		..\README.md = ..\README.md
 		..\.github\workflows\CI.yml = ..\.github\workflows\CI.yml
-		nuget.config = nuget.config
-		Directory.Build.props = Directory.Build.props
-		..\build\Tests.Common.props = ..\build\Tests.Common.props
-		..\build\Project.Common.props = ..\build\Project.Common.props
-		..\build\SourceLink.props = ..\build\SourceLink.props
-		..\scripts\build.ps1 = ..\scripts\build.ps1
 		..\.gitignore = ..\.gitignore
 		..\.editorconfig = ..\.editorconfig
-		..\tests\Directory.Build.props = ..\tests\Directory.Build.props
-		..\scripts\coverage.ps1 = ..\scripts\coverage.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EE7729B9-3EE0-48BF-8686-48FF5A15F4A1}"
@@ -40,6 +31,28 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp.Wpf", "..\samples\TestApp.Wpf\TestApp.Wpf.csproj", "{471CA05C-8EAB-4E21-BCF6-62A3BB2AD08F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amusoft.Toolkit.Mvvm.Wpf.UnitTests", "..\tests\Amusoft.Toolkit.Mvvm.Wpf.UnitTests\Amusoft.Toolkit.Mvvm.Wpf.UnitTests.csproj", "{38F05CE1-86AC-446E-9B1A-E404E89AE264}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C3365849-196D-4542-9A4A-FA33E90D4102}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\Project.Common.props = ..\build\Project.Common.props
+		..\build\SourceLink.props = ..\build\SourceLink.props
+		..\build\Tests.Common.props = ..\build\Tests.Common.props
+		..\tests\Directory.Build.props = ..\tests\Directory.Build.props
+		Directory.Build.props = Directory.Build.props
+		nuget.config = nuget.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{5AFD1F0D-A273-4D9B-90CA-643C34BC2742}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+		..\docs\GettingStarted.md = ..\docs\GettingStarted.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{A12AB451-AFDE-4E78-A4F9-4F5664F28B95}"
+	ProjectSection(SolutionItems) = preProject
+		..\scripts\build.ps1 = ..\scripts\build.ps1
+		..\scripts\coverage.ps1 = ..\scripts\coverage.ps1
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -163,5 +176,8 @@ Global
 		{D8C2DBA5-B8E0-41F3-92C2-D1D5EFEDD3C0} = {A64A221A-8CE9-483F-8609-23A39C9A8B01}
 		{471CA05C-8EAB-4E21-BCF6-62A3BB2AD08F} = {0F73A00C-86F0-4441-BE63-C6C72A726663}
 		{38F05CE1-86AC-446E-9B1A-E404E89AE264} = {A64A221A-8CE9-483F-8609-23A39C9A8B01}
+		{C3365849-196D-4542-9A4A-FA33E90D4102} = {CB6BBB7F-D474-4FC1-BEAB-451C59EC984C}
+		{5AFD1F0D-A273-4D9B-90CA-643C34BC2742} = {CB6BBB7F-D474-4FC1-BEAB-451C59EC984C}
+		{A12AB451-AFDE-4E78-A4F9-4F5664F28B95} = {CB6BBB7F-D474-4FC1-BEAB-451C59EC984C}
 	EndGlobalSection
 EndGlobal

@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestApp.Wpf"
-        xmlns:wpf="clr-namespace:Amusoft.Toolkit.Mvvm.Wpf;assembly=Amusoft.Toolkit.Mvvm.Wpf"
         xmlns:viewModels="clr-namespace:TestApp.Wpf.ViewModels"
+        xmlns:amumvvm="http://schemas.amusoft.com/wpf/2025/xaml"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:MainVM}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
+	    
+	    <!-- xmlns:wpf="clr-namespace:Amusoft.Toolkit.Mvvm.Wpf;assembly=Amusoft.Toolkit.Mvvm.Wpf" -->
+	    <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -23,7 +25,7 @@
             <Button Command="{Binding Path=RunGCCommand}" Content="Run garbage collector"/>
             <CheckBox IsChecked="{Binding Path=MainHasHistory, Mode=OneWay}"> main has history</CheckBox>
         </StackPanel>
-        <ContentControl wpf:RegionManager.RegionName="Main"
+        <ContentControl amumvvm:RegionManager.RegionName="Main"
                         Content="{Binding Path=Content}"
                         Grid.Row="1"/>
     </Grid>
