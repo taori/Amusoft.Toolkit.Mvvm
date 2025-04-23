@@ -8,7 +8,7 @@ using Amusoft.Toolkit.Mvvm.Core;
 namespace Amusoft.Toolkit.Mvvm.Wpf;
 
 /// <inheritdoc cref="IViewMapper"/>
-public class ViewMapper : IViewMapper
+internal class ViewMapper : IViewMapper
 {
 	private readonly IViewMappingEngine _viewMappingEngine;
 	private readonly ITemplateGenerator _templateGenerator;

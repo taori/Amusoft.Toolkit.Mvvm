@@ -13,6 +13,7 @@
 			navigation system
 		</PackageReleaseNotes>
 		<PackageTags>mvvm prism alternative</PackageTags>
+		<DefineConstants>$(DefineConstants);INTERNAL_NULLABLE_ATTRIBUTES</DefineConstants>
 	</PropertyGroup>
 	
 	<ItemGroup Condition="'$(TargetFramework)' != 'net462'">

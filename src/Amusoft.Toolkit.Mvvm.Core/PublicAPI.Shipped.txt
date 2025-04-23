@@ -1,0 +1,61 @@
+#nullable enable
+Amusoft.Toolkit.Mvvm.Core.FromToNavigationContext
+Amusoft.Toolkit.Mvvm.Core.FromToNavigationContext.PreviousModel.get -> object?
+Amusoft.Toolkit.Mvvm.Core.IAssemblyMappingTypeSource
+Amusoft.Toolkit.Mvvm.Core.IAssemblyMappingTypeSource.WithAssembly(System.Reflection.Assembly! assembly) -> Amusoft.Toolkit.Mvvm.Core.IAssemblyMappingTypeSource!
+Amusoft.Toolkit.Mvvm.Core.IAssemblyMappingTypeSource.WithViewFilter(System.Predicate<System.Type!>! filter) -> Amusoft.Toolkit.Mvvm.Core.IAssemblyMappingTypeSource!
+Amusoft.Toolkit.Mvvm.Core.IAssemblyMappingTypeSource.WithViewModelFilter(System.Predicate<System.Type!>! filter) -> Amusoft.Toolkit.Mvvm.Core.IAssemblyMappingTypeSource!
+Amusoft.Toolkit.Mvvm.Core.IMappingTypeSource
+Amusoft.Toolkit.Mvvm.Core.IMappingTypeSource.GetViewModelTypes() -> System.Type![]!
+Amusoft.Toolkit.Mvvm.Core.IMappingTypeSource.GetViewTypes() -> System.Type![]!
+Amusoft.Toolkit.Mvvm.Core.IModelFactory
+Amusoft.Toolkit.Mvvm.Core.IModelFactory.Create<T>() -> T
+Amusoft.Toolkit.Mvvm.Core.INavigatedTo
+Amusoft.Toolkit.Mvvm.Core.INavigatedTo.OnNavigatedToAsync(Amusoft.Toolkit.Mvvm.Core.FromToNavigationContext! context) -> System.Threading.Tasks.Task!
+Amusoft.Toolkit.Mvvm.Core.INavigateFrom
+Amusoft.Toolkit.Mvvm.Core.INavigateFrom.OnNavigatedFromAsync(Amusoft.Toolkit.Mvvm.Core.NavigatedFromContext! context) -> System.Threading.Tasks.Task<bool>!
+Amusoft.Toolkit.Mvvm.Core.INavigatingTo
+Amusoft.Toolkit.Mvvm.Core.INavigatingTo.OnNavigatingToAsync(Amusoft.Toolkit.Mvvm.Core.FromToNavigationContext! context) -> System.Threading.Tasks.Task!
+Amusoft.Toolkit.Mvvm.Core.INavigationService
+Amusoft.Toolkit.Mvvm.Core.INavigationService.CanGoBack(string! regionName) -> bool
+Amusoft.Toolkit.Mvvm.Core.INavigationService.ClearHistory(string! regionName) -> void
+Amusoft.Toolkit.Mvvm.Core.INavigationService.ClearView(string! regionName) -> void
+Amusoft.Toolkit.Mvvm.Core.INavigationService.GoBackAsync(string! regionName) -> System.Threading.Tasks.Task<bool>!
+Amusoft.Toolkit.Mvvm.Core.INavigationService.OnHistoryChanged -> Amusoft.Toolkit.Mvvm.Core.NavigationHistoryChanged!
+Amusoft.Toolkit.Mvvm.Core.INavigationService.PushAsync<TModel>(string! regionName) -> System.Threading.Tasks.Task<bool>!
+Amusoft.Toolkit.Mvvm.Core.INavigationService.PushAsync<TModel>(string! regionName, System.Action<TModel!>! modification) -> System.Threading.Tasks.Task<bool>!
+Amusoft.Toolkit.Mvvm.Core.INavigationService.PushAsync<TModel>(string! regionName, TModel! model) -> System.Threading.Tasks.Task<bool>!
+Amusoft.Toolkit.Mvvm.Core.IRestoreCallback
+Amusoft.Toolkit.Mvvm.Core.IRestoreCallback.OnRestored() -> void
+Amusoft.Toolkit.Mvvm.Core.IViewMappingEngine
+Amusoft.Toolkit.Mvvm.Core.IViewMappingEngine.GetMappings() -> System.Collections.Generic.HashSet<(System.Type! view, System.Type! viewModel)>!
+Amusoft.Toolkit.Mvvm.Core.MvvmCoreException
+Amusoft.Toolkit.Mvvm.Core.MvvmCoreException.MvvmCoreException() -> void
+Amusoft.Toolkit.Mvvm.Core.MvvmMappingResult
+Amusoft.Toolkit.Mvvm.Core.MvvmMappingResult.Matches.get -> (System.Type! viewModelType, System.Type! viewType)[]!
+Amusoft.Toolkit.Mvvm.Core.MvvmMappingResult.MismatchedViewModels.get -> System.Type![]!
+Amusoft.Toolkit.Mvvm.Core.MvvmMappingResult.MismatchedViews.get -> System.Type![]!
+Amusoft.Toolkit.Mvvm.Core.MvvmMappingResult.MvvmMappingResult((System.Type! viewModelType, System.Type! viewType)[]! matches, System.Type![]! mismatchedViews, System.Type![]! mismatchedViewModels) -> void
+Amusoft.Toolkit.Mvvm.Core.MvvmOptions
+Amusoft.Toolkit.Mvvm.Core.MvvmOptions.MvvmOptions() -> void
+Amusoft.Toolkit.Mvvm.Core.MvvmOptions.ViewMappings.get -> Amusoft.Toolkit.Mvvm.Core.ViewMappings!
+Amusoft.Toolkit.Mvvm.Core.NamespaceConventionOptions
+Amusoft.Toolkit.Mvvm.Core.NamespaceConventionOptions.NamespaceConventionOptions() -> void
+Amusoft.Toolkit.Mvvm.Core.NamespaceConventionOptions.ViewModelPattern.get -> System.Text.RegularExpressions.Regex!
+Amusoft.Toolkit.Mvvm.Core.NamespaceConventionOptions.ViewModelPattern.set -> void
+Amusoft.Toolkit.Mvvm.Core.NamespaceConventionOptions.ViewModelTruncateEndPattern.get -> System.Text.RegularExpressions.Regex!
+Amusoft.Toolkit.Mvvm.Core.NamespaceConventionOptions.ViewModelTruncateEndPattern.set -> void
+Amusoft.Toolkit.Mvvm.Core.NamespaceConventionOptions.ViewPattern.get -> System.Text.RegularExpressions.Regex!
+Amusoft.Toolkit.Mvvm.Core.NamespaceConventionOptions.ViewPattern.set -> void
+Amusoft.Toolkit.Mvvm.Core.NamespaceConventionOptions.ViewTruncateEndPattern.get -> System.Text.RegularExpressions.Regex!
+Amusoft.Toolkit.Mvvm.Core.NamespaceConventionOptions.ViewTruncateEndPattern.set -> void
+Amusoft.Toolkit.Mvvm.Core.NavigatedFromContext
+Amusoft.Toolkit.Mvvm.Core.NavigatedFromContext.NextModel.get -> object!
+Amusoft.Toolkit.Mvvm.Core.NavigationHistoryChanged
+Amusoft.Toolkit.Mvvm.Core.RestorePropertyAttribute
+Amusoft.Toolkit.Mvvm.Core.RestorePropertyAttribute.RestorePropertyAttribute() -> void
+Amusoft.Toolkit.Mvvm.Core.ViewMappings
+Amusoft.Toolkit.Mvvm.Core.ViewMappings.ViewMappings() -> void
+Amusoft.Toolkit.Mvvm.Core.ViewMappings.WithAssemblyConfiguration(System.Action<Amusoft.Toolkit.Mvvm.Core.IAssemblyMappingTypeSource!>! configuration) -> Amusoft.Toolkit.Mvvm.Core.ViewMappings!
+Amusoft.Toolkit.Mvvm.Core.ViewMappings.WithSource(Amusoft.Toolkit.Mvvm.Core.IMappingTypeSource! configuration) -> Amusoft.Toolkit.Mvvm.Core.ViewMappings!
+virtual Amusoft.Toolkit.Mvvm.Core.NavigationHistoryChanged.Invoke(string! regionName) -> void

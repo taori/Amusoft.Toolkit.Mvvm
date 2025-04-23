@@ -35,6 +35,9 @@ internal class NavigationService : INavigationService
 		var model = _regionModelHistory.GetLastRegionModel(regionName);
 		var control = GetRegionControl(regionName);
 
+		if (model is null)
+			return false;
+
 		return await UpdateModelAsync(model, control, false);
 	}
 
@@ -59,12 +62,17 @@ internal class NavigationService : INavigationService
 		return await PushModelToRegionAsync(model, regionName);
 	}
 
-	public async Task<bool> PushAsync<TModel>(string regionName, Action<TModel>? modification = null) where TModel : class
+	public async Task<bool> PushAsync<TModel>(string regionName, Action<TModel> modification) where TModel : class
 	{
 		var model = _modelFactory.Create<TModel>();
 		modification?.Invoke(model);
 
 		return await PushModelToRegionAsync(model, regionName);
+	}
+
+	public Task<bool> PushAsync<TModel>(string regionName) where TModel : class
+	{
+		return PushAsync<TModel>(regionName, _ => { });
 	}
 
 	private IRegionControl GetRegionControl(string regionName)

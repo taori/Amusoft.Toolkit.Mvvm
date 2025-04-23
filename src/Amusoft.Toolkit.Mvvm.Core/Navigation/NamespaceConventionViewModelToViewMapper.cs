@@ -10,7 +10,7 @@ namespace Amusoft.Toolkit.Mvvm.Core;
 /// <summary>
 /// Matches values by names
 /// </summary>
-public class NamespaceConventionViewModelToViewMapper : IViewModelToViewMapper
+internal class NamespaceConventionViewModelToViewMapper : IViewModelToViewMapper
 {
 	private readonly NamespaceConventionOptions _options;
 

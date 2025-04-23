@@ -1,0 +1,12 @@
+#nullable enable
+Amusoft.Toolkit.Mvvm.Wpf.ITemplateGenerator
+Amusoft.Toolkit.Mvvm.Wpf.ITemplateGenerator.CreateTemplate(System.Type! viewModel, System.Type! view) -> System.Windows.DataTemplate!
+Amusoft.Toolkit.Mvvm.Wpf.IViewMapper
+Amusoft.Toolkit.Mvvm.Wpf.IViewMapper.Map(System.Windows.ResourceDictionary! dictionary) -> void
+Amusoft.Toolkit.Mvvm.Wpf.RegionManager
+Amusoft.Toolkit.Mvvm.Wpf.RegionManager.RegionManager() -> void
+Amusoft.Toolkit.Mvvm.Wpf.ServiceCollectionExtensions
+static Amusoft.Toolkit.Mvvm.Wpf.RegionManager.GetRegionName(System.Windows.Controls.ContentControl! element) -> string!
+static Amusoft.Toolkit.Mvvm.Wpf.RegionManager.SetRegionName(System.Windows.Controls.ContentControl! element, string! value) -> void
+static Amusoft.Toolkit.Mvvm.Wpf.ServiceCollectionExtensions.AddMvvmWpf(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services, System.Action<Amusoft.Toolkit.Mvvm.Core.MvvmOptions!>? setupAction = null) -> void
+static readonly Amusoft.Toolkit.Mvvm.Wpf.RegionManager.RegionNameProperty -> System.Windows.DependencyProperty!

@@ -1,6 +1,6 @@
 ﻿<Project>
 	<PropertyGroup>
-		<VersionPrefix>0.3.1</VersionPrefix>
+		<VersionPrefix>0.3.2</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Copyright>Copyright © Amusoft 2025</Copyright>
 		<Authors>https://github.com/taori/Amusoft.Toolkit.Mvvm/graphs/contributors</Authors>
@@ -19,7 +19,7 @@
 		<PackageProjectUrl>https://github.com/taori/Amusoft.Toolkit.Mvvm</PackageProjectUrl>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<NoWarn>MSB3243;NU1801</NoWarn>
-		<WarningsAsErrors>CS1591</WarningsAsErrors>
+		<WarningsAsErrors>CS1591;RS0016;RS0037;RS0041</WarningsAsErrors>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -32,8 +32,15 @@
 		<None Include="..\packageIcon.png" Pack="True" PackagePath="\Resources"/>
 	</ItemGroup>
 
-	<ItemGroup>
+	<ItemGroup>		
 		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0" PrivateAssets="all"/>
+		<!--https://github.com/dotnet/roslyn/blob/dd09372bc9e1d1fe45c73bfb25850fb9246a6744/src/RoslynAnalyzers/PublicApiAnalyzers/PublicApiAnalyzers.Help.md?plain=1-->
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.12.0-beta1.25155.1" PrivateAssets="all"/>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<AdditionalFiles Include="PublicAPI.Shipped.txt" />
+		<AdditionalFiles Include="PublicAPI.Unshipped.txt" />
 	</ItemGroup>
 
 	<ItemGroup>

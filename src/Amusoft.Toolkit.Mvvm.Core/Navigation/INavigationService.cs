@@ -53,7 +53,14 @@ public interface INavigationService
     /// <param name="regionName"></param>
     /// <param name="modification"></param>
     /// <typeparam name="TModel"></typeparam>
-    Task<bool> PushAsync<TModel>(string regionName, Action<TModel>? modification = null) where TModel : class;
+    Task<bool> PushAsync<TModel>(string regionName, Action<TModel> modification) where TModel : class;
+
+    /// <summary>
+    /// Pushes a model, which was created via DI onto the navigation stack of a registered region
+    /// </summary>
+    /// <param name="regionName"></param>
+    /// <typeparam name="TModel"></typeparam>
+    Task<bool> PushAsync<TModel>(string regionName) where TModel : class;
 }
 
 /// <summary>
