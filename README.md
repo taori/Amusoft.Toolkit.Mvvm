@@ -41,7 +41,7 @@ Amusoft.Toolkit.Mvvm.Wpf | 100% | 85% | ✔
 
 _Minimum allowed line rate is 90%_
 
-[Coverage details]()
+[Coverage details](https://taori.github.io/Amusoft.Toolkit.Mvvm)
 <!--CoverageEnd-->
 
 ## Description
