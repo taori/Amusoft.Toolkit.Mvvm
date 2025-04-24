@@ -164,6 +164,7 @@ jobs:
     uses: taori/actions/.github/workflows/coverage.yml@v10
     with:
       coberturaArtifactsName: ${{ needs.build.outputs.artifact-name-cobertura }}
+      githubPagesUrl: "https://taori.github.io/Amusoft.Toolkit.Mvvm"
       threshold: '90 95'
       debugWorkflow: false
 
